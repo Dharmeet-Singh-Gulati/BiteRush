@@ -14,7 +14,6 @@ const ResCard = (props) => {
     resData?.card?.card?.restaurant?.info?.sla;
   const { imageId } = resData?.card?.card?.info;
   const { id: restrauntId } = resData?.card?.card?.restaurant?.info;
-  console.log(restroName, restrauntId, typeof restrauntId);
   const { name: userName } = useContext(UserInfo);
 
   return (

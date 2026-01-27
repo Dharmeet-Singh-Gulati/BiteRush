@@ -8,18 +8,22 @@ import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestrauntMenu from "./components/RestrauntMenu";
 import UserInfo from "./utils/UserInfo";
+import { Provider } from "react-redux";
+import appStore from "./utils/Redux/appStore";
 
 const Contact = lazy(() => import("./components/Contact"));
 
 const AppLayout = () => {
   return (
     <div className="app-layout">
-      <UserInfo.Provider value={{ name: "sidak", loggedIn: true }}>
-        <Header />
-      </UserInfo.Provider>
-      <div className="pt-20">
-        <Outlet />
-      </div>
+      <Provider store={appStore}>
+        <UserInfo.Provider value={{ name: "sidak", loggedIn: true }}>
+          <Header />
+        </UserInfo.Provider>
+        <div className="pt-20">
+          <Outlet />
+        </div>
+      </Provider>
     </div>
   );
 };

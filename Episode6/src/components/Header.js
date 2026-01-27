@@ -2,12 +2,14 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import UserInfo from "../utils/UserInfo";
+import { useSelector } from "react-redux";
 
 const LOGO = new URL("../utils/assets/logo.jpg", import.meta.url);
 const Header = () => {
   const [loginBtn, setLoginBtn] = useState("Login");
   const isOnline = useOnline();
   const userInfo = useContext(UserInfo);
+  const cartItems = useSelector((state) => state.cart.items);
 
   return (
     <div className="bg-pink-200 flex justify-between fixed z-50 mt-0 w-full">
@@ -26,7 +28,11 @@ const Header = () => {
           <li className="mr-5">
             <Link to={"/contact"}>Contact Us</Link>
           </li>
-          <li className="mr-10">Cart</li>
+          <li className="mr-10 font-bold text-2xl">
+            Cart - ({cartItems.length} items)
+            {console.log("Cart items are: ",cartItems)}
+          </li>
+
           <button
             className="login-btn border-2 border-solid px-5 rounded-lg bg-pink-50 hover:bg-pink-75 ease-in transition-all duration-200 cursor-pointer"
             onClick={() => {

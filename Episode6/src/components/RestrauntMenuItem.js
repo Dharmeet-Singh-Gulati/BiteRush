@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/Redux/cartSlice";
 import {
   CDN_URL,
   NON_VEG_SYMBOL,
@@ -6,8 +8,6 @@ import {
   VEG_SYMBOL,
 } from "../utils/constants";
 const RestaurantMenuItem = ({ itemList }) => {
-  console.log(itemList);
-
   return (
     <div className="transition-all duration-2000 ease-in-out">
       {itemList.map((item) => (
@@ -19,6 +19,7 @@ const RestaurantMenuItem = ({ itemList }) => {
 
 const Card = ({ item }) => {
   const [more, setMore] = useState(false);
+  const dispatch = useDispatch();
 
   const { name, description, price, defaultPrice, imageId, isVeg } =
     item?.card?.info;
@@ -60,8 +61,16 @@ const Card = ({ item }) => {
         </div>
       </div>
       <div className="relative">
-        <img className="h-30 pl-10  " src={CDN_URL + imageId} />
-        <span className="absolute bottom-3 rounded-lg border-2 border-green-300 p-2 font-medium text-lg left-20 bg-gray-50 cursor-pointer hover:bg-black hover:text-white">
+        <img
+          className="h-30 pl-10  "
+          src={new URL(CDN_URL + imageId, import.meta.url).href}
+        />
+        <span
+          className="absolute bottom-3 rounded-lg border-2 border-green-300 p-2 font-medium text-lg left-20 bg-gray-50 cursor-pointer hover:bg-black hover:text-white"
+          onClick={() => {
+            dispatch(addItem("pizza"));
+          }}
+        >
           Add +
         </span>
       </div>
