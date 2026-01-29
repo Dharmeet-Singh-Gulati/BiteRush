@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addItem } from "../utils/Redux/cartSlice";
+import { addItem, removeItem } from "../utils/Redux/cartSlice";
 import {
   CDN_URL,
   NON_VEG_SYMBOL,
@@ -10,14 +10,21 @@ import {
 const RestaurantMenuItem = ({ itemList }) => {
   return (
     <div className="transition-all duration-2000 ease-in-out">
+      {console.log("Restraunt Menu item Called")}
       {itemList.map((item) => (
-        <Card item={item} key={item.card.info.id} />
+        <Card
+          item={item}
+          key={item.card.info.id}
+          addBtn={true}
+          removeBtn={false}
+        />
       ))}
     </div>
   );
 };
 
-const Card = ({ item }) => {
+export const Card = ({ item, addBtn, removeBtn }) => {
+  console.log("Card Called");
   const [more, setMore] = useState(false);
   const dispatch = useDispatch();
 
@@ -65,14 +72,31 @@ const Card = ({ item }) => {
           className="h-30 pl-10  "
           src={new URL(CDN_URL + imageId, import.meta.url).href}
         />
-        <span
-          className="absolute bottom-3 rounded-lg border-2 border-green-300 p-2 font-medium text-lg left-20 bg-gray-50 cursor-pointer hover:bg-black hover:text-white"
-          onClick={() => {
-            dispatch(addItem("pizza"));
-          }}
-        >
-          Add +
-        </span>
+        {addBtn ? (
+          <span
+            className="absolute bottom-3 rounded-lg border-2 border-green-300 p-2 font-medium text-lg left-20 bg-gray-50 cursor-pointer hover:bg-black hover:text-white"
+            onClick={() => {
+              let quantity = 1;
+              dispatch(addItem({ id: item.card.info.id, item, quantity }));
+            }}
+          >
+            Add +
+          </span>
+        ) : (
+          <></>
+        )}
+        {removeBtn ? (
+          <span
+            className="absolute bottom-3 rounded-lg border-2 border-green-300 p-2 font-medium text-lg left-20 bg-gray-50 cursor-pointer hover:bg-red-500 hover:text-white hover:border-black hover:font-bold"
+            onClick={() => {
+              dispatch(removeItem(item.card.info.id));
+            }}
+          >
+            Remove
+          </span>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

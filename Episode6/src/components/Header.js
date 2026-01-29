@@ -28,9 +28,9 @@ const Header = () => {
           <li className="mr-5">
             <Link to={"/contact"}>Contact Us</Link>
           </li>
-          <li className="mr-10 font-bold text-2xl">
-            Cart - ({cartItems.length} items)
-            {console.log("Cart items are: ",cartItems)}
+          <li className="mr-10 text-m">
+            <Link to={"/cart"}>🛒 ({cartItems.length} - items)</Link>
+            {console.log("Cart items are: ", cartItems)}
           </li>
 
           <button
@@ -42,7 +42,7 @@ const Header = () => {
             }}
           >
             {loginBtn}
-            {console.log(userInfo)}
+            {console.log("UserContext Info", userInfo)}
           </button>
           <li className="mr-10">{userInfo.name}</li>
         </ul>
