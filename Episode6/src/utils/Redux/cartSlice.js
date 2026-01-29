@@ -1,5 +1,4 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import { act } from "react";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -23,7 +22,16 @@ const cartSlice = createSlice({
       state.items = [];
     },
     removeItem: (state, action) => {
-      const id = action.payload;
+      const { id } = action.payload;
+      for (let i = 0; i < state.items.length; i++) {
+        if (id === state.items[i].id) {
+          state.items.splice(i, 1);
+          break;
+        }
+      }
+    },
+    removeItemQuantity: (state, action) => {
+      const { id } = action.payload;
       for (let i = 0; i < state.items.length; i++) {
         if (id === state.items[i].id) {
           if (state.items[i].quantity == 1) {
@@ -39,6 +47,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, clearCart, removeItem } = cartSlice.actions;
+export const { addItem, clearCart, removeItem, removeItemQuantity } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

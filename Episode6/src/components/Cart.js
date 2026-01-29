@@ -1,7 +1,8 @@
+import Card from "./Card";
 import { clearCart } from "../utils/Redux/cartSlice";
-import { Card } from "./RestrauntMenuItem";
 import { useDispatch, useSelector } from "react-redux";
 const Cart = () => {
+  // Add a custom Hook to address Ui and Data layer differently
   const itemList = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
   const handlClearCart = () => {
@@ -28,6 +29,7 @@ const Cart = () => {
             key={item.item.card.info.id}
             addBtn={false}
             removeBtn={true}
+            quantity={item.quantity}
           />
         );
       })}
