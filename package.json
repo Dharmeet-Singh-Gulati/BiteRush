@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Learning Namaste React",
   "scripts": {
-    "start": "npx parcel ./Episode6/index.html",
+    "start": "npx parcel ./index.html",
     "build": "npx parcel build",
     "clean": "rmdir /s /q .parcel-cache dist",
     "test": "jest"
