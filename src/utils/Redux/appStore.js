@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./cartSlice";
+import userReducer from "./userSlice";
 
 const loadState = () => {
   try {
@@ -16,6 +17,7 @@ const loadState = () => {
 const appStore = configureStore({
   reducer: {
     cart: cartReducer,
+    user: userReducer,
   },
   preloadedState: loadState(),
 });

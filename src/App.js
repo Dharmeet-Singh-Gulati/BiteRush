@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useContext, useState } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "../index.css";
 import Header from "./components/Header";
@@ -12,10 +12,14 @@ import UserInfo from "./utils/UserInfo";
 import { Provider } from "react-redux";
 import appStore from "./utils/Redux/appStore";
 import Checkout from "./components/Checkout";
+import Login from "./components/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const Contact = lazy(() => import("./components/Contact"));
 
 const AppLayout = () => {
+  // const dispatch = useDispatch();
+  
   return (
     <div className="app-layout">
       <Provider store={appStore}>
@@ -61,7 +65,15 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/checkout",
-        element: <Checkout />,
+        element: (
+          <ProtectedRoute>
+            <Checkout />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
     errorElement: <Error />,
