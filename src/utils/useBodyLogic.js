@@ -1,23 +1,37 @@
+import { useDispatch, useSelector } from "react-redux";
 import { SWIGGY_API } from "./constants";
 import { useState, useEffect } from "react";
+import { addHomePageData } from "./Redux/homePageSlice";
 
 const useBodyLogic = () => {
   const [listOfRestraunts, setListOfRestraunts] = useState([]);
   const [filterList, setFilterList] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const homePageData = useSelector((state) => state.homePage.homePageData);
+  const dispatch = useDispatch();
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
+    if (homePageData.length != 0) {
+      setListOfRestraunts(homePageData);
+      setFilterList(homePageData);
+      return;
+    }
     let res = await fetch(SWIGGY_API);
     let json = await res.json();
 
     setListOfRestraunts(
-      (json?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards).slice(1)
+      (json?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards).slice(1),
     );
     setFilterList(
-      (json?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards).slice(1)
+      (json?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards).slice(1),
+    );
+    dispatch(
+      addHomePageData(
+        (json?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards).slice(1),
+      ),
     );
   };
 

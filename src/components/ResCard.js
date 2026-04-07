@@ -2,12 +2,11 @@ import { Link } from "react-router-dom";
 import { STAR_SVG, VEG_SYMBOL } from "../utils/constants";
 import { CDN_URL } from "../utils/constants";
 import { CHECK_OUT_SVG } from "../utils/constants";
-import { useContext } from "react";
-import UserInfo from "../utils/UserInfo";
 import { addItem } from "../utils/Redux/cartSlice";
 import { useDispatch } from "react-redux";
 
 const VEGSYMBOL = VEG_SYMBOL;
+
 const ResCard = (props) => {
   const { resData } = props;
   const { name: mealName, price: mealPrice } = resData?.card?.card?.info;
@@ -16,9 +15,7 @@ const ResCard = (props) => {
     resData?.card?.card?.restaurant?.info?.sla;
   const { imageId } = resData?.card?.card?.info;
   const { id: restrauntId } = resData?.card?.card?.restaurant?.info;
-  const { name: userName } = useContext(UserInfo);
   const dispatch = useDispatch();
-  console.log(resData);
 
   return (
     <div className="res-card-container border-2 border-black h-75 w-120 p-2.5 bg-white rounded-2xl ">
@@ -49,11 +46,10 @@ const ResCard = (props) => {
           >
             <h3 className="meal-name text-[#2c2c2c]">{mealName}</h3>{" "}
           </Link>
-          <h4 className="price">₹ {mealPrice / 100}</h4>
+          <h4 className="price">â‚¹ {mealPrice / 100}</h4>
           <h4 className="more-details-btn w-27.5 border-solid border pl-4 rounded-lg text-[#5b5a5a]">
             More Details
           </h4>
-          <h4>{userName}</h4>
         </div>
         <div className="lower-right">
           <div className="meal-wrapper relative">

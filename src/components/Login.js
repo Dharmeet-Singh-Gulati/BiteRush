@@ -28,7 +28,7 @@ const Login = () => {
     (field) => formData[field].trim() !== "",
   );
   if (user) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/cart"} />;
   }
 
   const signUp = () => {

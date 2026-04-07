@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "../index.css";
 import Header from "./components/Header";
@@ -8,7 +8,6 @@ import Error from "./components/Error";
 import Cart from "./components/Cart";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestrauntMenu from "./components/RestrauntMenu";
-import UserInfo from "./utils/UserInfo";
 import { Provider } from "react-redux";
 import appStore from "./utils/Redux/appStore";
 import Checkout from "./components/Checkout";
@@ -19,13 +18,11 @@ const Contact = lazy(() => import("./components/Contact"));
 
 const AppLayout = () => {
   // const dispatch = useDispatch();
-  
+
   return (
     <div className="app-layout">
       <Provider store={appStore}>
-        <UserInfo.Provider value={{ name: "sidak", loggedIn: true }}>
-          <Header />
-        </UserInfo.Provider>
+        <Header />
         <div className="pt-20">
           <Outlet />
         </div>
