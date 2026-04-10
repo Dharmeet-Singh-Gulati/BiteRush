@@ -21,42 +21,74 @@ const Cart = () => {
     dispatch(clearCart());
   };
   if (!itemList.length) {
-    return <h1>Cart is Empty</h1>;
+    return (
+      <div className="mx-auto flex min-h-[60vh] max-w-4xl items-center justify-center px-4 py-10">
+        <div className="w-full rounded-xl border border-[#E8E8E8] bg-white p-6 text-center shadow-sm dark:border-[#3A3A3A] dark:bg-[#2A2A2A] sm:p-8">
+          <h1 className="text-xl font-semibold text-[#1C1C1C] dark:text-white sm:text-2xl lg:text-3xl">Cart is empty</h1>
+          <p className="mt-3 text-sm text-[#696969] dark:text-gray-400 sm:text-base">
+            Add a few dishes to see your order summary here.
+          </p>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className="w-6/12 mx-auto pt-15 relative">
-      <div className="font-bold text-2xl w-6/12 mx-auto flex justify-center items-center h-20 mb-2 ">
-        Cart
-      </div>
-      <div
-        className="bg-black text-white text-lg rounded-2xl p-2 m-2  mb-10 w-40  mx-auto text-center  cursor-pointer"
-        onClick={handlClearCart}
-      >
-        Clear Cart
-      </div>
-      {itemList.map((item) => {
-        return (
-          <Card
-            item={item.item}
-            key={item.item.card.info.id}
-            addBtn={false}
-            removeBtn={true}
-            quantity={item.quantity}
-          />
-        );
-      })}
-      <Link to={"/checkout"}>
-        <div className="bg-green-500 fixed bottom-10 right-20 p-2 rounded-lg hover:bg-green-600 cursor-pointer duration-500 transition-all">
-          <h3 className="text-2xl text-white font-bold inline-block">
-            Check out
-          </h3>
-          <p className="text-white text-md inline-block mx-2 px-1">
-            {RUPEE_SVG}
-            {totalPayble}
-          </p>
-          {CHECK_OUT_SVG}
+    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mb-6 rounded-[28px] bg-linear-to-r from-[#FFF1F2] via-white to-[#FFF8F0] p-5 shadow-sm dark:from-[#2A1E20] dark:via-[#1C1C1C] dark:to-[#241F1B] sm:p-6">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-[#1C1C1C] dark:text-white sm:text-2xl lg:text-3xl">Your Cart</h1>
+            <p className="mt-2 text-sm text-[#696969] dark:text-gray-400 sm:text-base">
+              Review your selected items before checkout.
+            </p>
+          </div>
+          <div
+            className="flex h-10 w-full cursor-pointer items-center justify-center rounded-xl border border-[#E8E8E8] bg-white px-4 py-2 text-sm font-semibold text-[#1C1C1C] shadow-sm transition-all duration-200 hover:shadow-md dark:border-[#3A3A3A] dark:bg-[#2A2A2A] dark:text-white lg:w-fit"
+            onClick={handlClearCart}
+          >
+            Clear Cart
+          </div>
         </div>
-      </Link>
+      </div>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_350px]">
+        <div className="min-w-0">
+          {itemList.map((item) => {
+            return (
+              <Card
+                item={item.item}
+                key={item.item.card.info.id}
+                addBtn={false}
+                removeBtn={true}
+                quantity={item.quantity}
+              />
+            );
+          })}
+        </div>
+        <div className="h-fit rounded-xl border border-[#E8E8E8] bg-white p-5 shadow-sm lg:sticky lg:top-28 dark:border-[#3A3A3A] dark:bg-[#2A2A2A]">
+          <h3 className="text-xl font-semibold text-[#1C1C1C] dark:text-white sm:text-2xl">Summary</h3>
+          <div className="mt-5 flex items-center justify-between text-sm text-[#696969] dark:text-gray-400">
+            <span>Items</span>
+            <span>{itemList.length}</span>
+          </div>
+          <div className="mt-3 flex items-center justify-between text-sm text-[#696969] dark:text-gray-400">
+            <span>Total</span>
+            <span>
+              {RUPEE_SVG}
+              {totalPayble}
+            </span>
+          </div>
+          <Link to={"/checkout"}>
+            <div className="mt-6 flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#EF4F5F] px-4 py-3 text-white shadow-sm transition-all duration-200 hover:shadow-md hover:brightness-95">
+              <h3 className="text-base font-semibold">Check out</h3>
+              <p className="text-sm">
+                {RUPEE_SVG}
+                {totalPayble}
+              </p>
+              {CHECK_OUT_SVG}
+            </div>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

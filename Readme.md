@@ -1,35 +1,115 @@
-## Namaste React Course by Akshay Saini
+# 🍔 BiteRush – Food Ordering Web App
 
-# _Episode 01 - Inception_
+A modern, responsive food ordering web application built with a focus on clean UI, fast user experience, and scalable frontend architecture.
 
-## Theory :
+---
 
-- What is `Emmet`?
-- What is `CDN`? Why do we `use` it?
-- Why is `React known as React`?
-- What is `crossorigin in script tag`?
-- What is difference between `React and ReactDOM`?
-- What is difference between `react.development.js` and `react.production.js` files via CDN?
+## 🚀 Live Demo
 
-## Coding :
+https://food-ordering-app-2d4cd.web.app/
 
-- Set up all the `tools in your laptop`
-  - `VS Code`
-  - `Chrome`
-  - `Extensions of Chrome`
-- Create a `new Git repo`
-- Build your `first Hello World` program using,
-  - Using `just HTML`
-  - Using `JS to manipulate the DOM`
-  - Using `React`
-    - use `CDN Links`
-    - Create `an Element`
-    - Create `nested React Elements`
-    - Use `root.render`
-- `Push code to Github` (Theory as well as code)
-- Learn about `Arrow Functions` before the next class
+---
 
-## References:
+## 📸 Screenshots
 
-- https://beta.reactjs.org/apis/react/createElement
-- https://www.youtube.com/watch?v=IrHmpdORLu8
+*(Add images after deployment)*
+
+* Home Page
+* Restaurant Menu
+* Cart Page
+* Checkout Page
+* Dark Mode
+
+---
+
+## ✨ Features
+
+* 🔍 Search restaurants by name
+* ⭐ Filter top-rated restaurants
+* 🛒 Add / remove items from cart
+* 💾 Persistent cart using local storage
+* 🔐 User authentication (Firebase)
+* 🚫 Protected routes
+* 📦 Order history tracking
+* 🌙 Dark / Light mode toggle
+* ⚡ Toast notifications for user feedback
+* 📱 Fully responsive (mobile-first design)
+
+---
+
+## ⚙️ Tech Stack
+
+* **Frontend:** React
+* **State Management:** Redux Toolkit
+* **Routing:** React Router
+* **Styling:** Tailwind CSS
+* **Authentication:** Firebase Auth
+* **API:** Swiggy Live API
+* **State Persistence:** Local Storage
+
+---
+
+## 🧠 Learnings
+
+* Managing complex state using **Redux Toolkit**
+* Handling **async data fetching** and API integration
+* Implementing **authentication & protected routes**
+* Designing **scalable and reusable UI components**
+* Building a **consistent UI system with Tailwind CSS**
+* Implementing **dark mode using global state (Redux)**
+* Creating **responsive layouts (mobile-first approach)**
+
+---
+
+## 🏗️ Project Structure
+
+```
+src/
+ ├── components/
+ ├── utils/
+ │    ├── Redux/
+ │    ├── assets/
+ │    └── custom hooks
+ ├── App.js
+```
+
+---
+
+## 🛠️ Installation & Setup
+
+Clone the repository:
+
+```
+git clone <your-repo-link>
+cd BiteRush
+```
+
+Install dependencies:
+
+```
+npm install
+```
+
+Run the app:
+
+```
+npm start
+```
+
+---
+
+## 🔮 Future Improvements
+
+* 💳 Payment gateway integration
+* 🌐 Real backend instead of static menu
+* 🧪 Unit & integration testing (Jest + RTL)
+* ⚡ Performance optimization & lazy loading
+
+---
+
+## 📬 Contact
+
+* **LinkedIn:** Add Link
+* **GitHub:** Add Link
+
+---

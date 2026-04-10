@@ -18,69 +18,61 @@ const ResCard = (props) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="res-card-container border-2 border-black h-75 w-120 p-2.5 bg-white rounded-2xl ">
-      <div className="upper-section flex mt-0.5 mx-1 items-center justify-between">
-        <div className="upper-left flex-col relative py-0.5 rounded-[10px]">
-          <h4 className="res-name text-[#3f3f3f]">By {restroName}</h4>
-          <div className="rating-eta items-center mt-1">
-            <span className="absolute bottom-1">{STAR_SVG}</span>
-            <h4 className="rating mr-5 pl-5 inline-block text-[#5b5a5a]">
-              {avgRating}
-            </h4>
-            <h4 className="eta inline-block text-[#5b5a5a]">
-              {minDeliveryTime} - {maxDeliveryTime} MINS
-            </h4>
-          </div>
+    <div className="res-card-container flex h-full flex-col justify-between overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-200 hover:shadow-md dark:bg-[#2A2A2A]">
+      <div className="meal-wrapper relative">
+        <div className="meal-logo overflow-hidden">
+          <img
+            className="res-logo h-44 w-full rounded-t-xl object-cover"
+            alt="res-logo"
+            src={CDN_URL + imageId}
+          ></img>
         </div>
-        <div className="upper-right">{CHECK_OUT_SVG}</div>
       </div>
-      <div className="separator mb-4">
-        <pre> ..................................................</pre>
-      </div>
-      <div className="lower-section flex pl-1">
-        <div className="lower-left flex-col gap-1 w-50 shrink-0">
+      <div className="flex flex-grow flex-col gap-2 p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{mealName}</h3>
+            <h4 className="mt-1 text-sm text-gray-500 dark:text-gray-400">By {restroName}</h4>
+          </div>
+          <div className="shrink-0 text-[#EF4F5F]">{CHECK_OUT_SVG}</div>
+        </div>
+        <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+          <div className="flex items-center gap-1">
+            <span>{STAR_SVG}</span>
+            <h4>{avgRating}</h4>
+          </div>
+          <h4>{minDeliveryTime} - {maxDeliveryTime} mins</h4>
+        </div>
+        <div className="h-px w-full bg-[#E8E8E8] dark:bg-[#3A3A3A]"></div>
+        <div className="flex flex-col gap-2">
           <img src={VEGSYMBOL} className="w-5"></img>
           <Link
             className="decoration-0 cursor-pointer"
             to={"restraunts/" + restrauntId}
           >
-            <h3 className="meal-name text-[#2c2c2c]">{mealName}</h3>{" "}
+            <h4 className="text-sm text-gray-500 dark:text-gray-400">Explore menu details</h4>
           </Link>
-          <h4 className="price">â‚¹ {mealPrice / 100}</h4>
-          <h4 className="more-details-btn w-27.5 border-solid border pl-4 rounded-lg text-[#5b5a5a]">
-            More Details
-          </h4>
+          <h4 className="font-semibold text-gray-900 dark:text-white">Rs. {mealPrice / 100}</h4>
         </div>
-        <div className="lower-right">
-          <div className="meal-wrapper relative">
-            <div className="meal-logo flex justify-center overflow-hidden h-42.5 w-43.75 rounded-lg">
-              <img
-                className="res-logo h-43.75 "
-                alt="res-logo"
-                src={CDN_URL + imageId}
-              ></img>
-
-              <h2
-                className="add-btn absolute text-green-600 -bottom-1.75 bg-white py-0.5 px-8 
-              border border-[#ddd] transition-all duration-200 hover:bg-[#f0eeee] hover:text-[#099F09] cursor-pointer"
-                onClick={() => {
-                  let quantity = 1;
-                  dispatch(
-                    addItem({
-                      id: resData?.card?.card?.info?.id,
-                      item: resData.card,
-                      quantity,
-                    }),
-                  );
-                }}
-              >
-                Add
-              </h2>
-            </div>
-          </div>
-          <h5 className="customisable-banner mb-1  pb-0 pl-12 text-[#5b5a5a]">
+        <div className="mt-auto flex items-center justify-between gap-3 pt-2">
+          <h4 className="inline-flex w-fit rounded-full border border-[#E8E8E8] bg-[#F8F8F8] px-4 py-2 text-sm text-gray-500 dark:border-[#3A3A3A] dark:bg-[#1C1C1C] dark:text-gray-400">
             Customisable
-          </h5>
+          </h4>
+          <h2
+            className="add-btn cursor-pointer rounded-full bg-[#EF4F5F] px-5 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:shadow-md"
+            onClick={() => {
+              let quantity = 1;
+              dispatch(
+                addItem({
+                  id: resData?.card?.card?.info?.id,
+                  item: resData.card,
+                  quantity,
+                }),
+              );
+            }}
+          >
+            Add
+          </h2>
         </div>
       </div>
     </div>
@@ -91,7 +83,7 @@ export const withPromotedLabel = (ResCard) => {
   return (props) => (
     <div className="relative">
       <ResCard {...props} />
-      <label className="absolute bg-black text-white rounded-lg p-2 left-52 top-25">
+      <label className="absolute left-4 top-4 rounded-full bg-[#1C1C1C] px-3 py-1 text-xs font-semibold text-white shadow-sm">
         Promoted
       </label>
     </div>

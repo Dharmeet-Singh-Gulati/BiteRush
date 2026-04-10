@@ -8,26 +8,29 @@ const RestaurantMenuItemCard = ({
 }) => {
   return (
     <div>
-      <div className="w-6/12 mx-auto h-3 mt-4 bg-gray-200"></div>
-      <div className="w-6/12 mx-auto my-3 flex-col">
+      <div className="mx-auto flex w-full flex-col">
         <div
-          className="flex justify-between px-2 py-1 items-center bg-white cursor-pointer "
+          className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-[#E8E8E8] bg-white px-4 py-4 shadow-sm transition-all duration-200 hover:shadow-md dark:border-[#3A3A3A] dark:bg-[#2A2A2A] sm:px-5"
           onClick={() => {
             index == indexCheck
               ? setShowItemCard(null)
               : setShowItemCard(index);
           }}
         >
-          <span className="font-bold text-black text-lg cursor-pointer">
+          <span className="cursor-pointer text-base font-semibold text-[#1C1C1C] dark:text-white sm:text-lg">
             {resObj.card.card.title} ({resObj.card.card.itemCards.length})
           </span>
-          <span className="cursor-pointer">⬇</span>
+          <span className="cursor-pointer text-xl text-[#696969] dark:text-gray-400">
+            {index == indexCheck ? "-" : "+"}
+          </span>
         </div>
         {index == indexCheck && (
-          <RestaurantMenuItem
-            key={resObj.card.card.title}
-            itemList={resObj.card.card.itemCards}
-          />
+          <div className="mt-3">
+            <RestaurantMenuItem
+              key={resObj.card.card.title}
+              itemList={resObj.card.card.itemCards}
+            />
+          </div>
         )}
       </div>
     </div>

@@ -3,3 +3,6 @@
 /.parcel-cache
 /Assignments
 /testing
+/.firebase
+/docs
+/package-lock.json

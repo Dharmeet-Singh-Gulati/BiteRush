@@ -17,94 +17,118 @@ const Card = ({ item, addBtn, removeBtn, quantity }) => {
     removeItemQuantityDispatch,
     removeItemDispatch,
   ] = useCard(item);
+  const isMenuCard = addBtn;
+  const isCartCard = removeBtn;
   return (
     <div
       key={name + description}
-      className="flex border-b-4 border-gray-200 p-2 my-2"
+      className={`my-3 overflow-hidden rounded-xl bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md dark:bg-[#2A2A2A] ${
+        isMenuCard
+          ? "flex flex-col gap-4 lg:flex-row lg:items-start"
+          : "flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+      }`}
     >
-      <div className="w-9/12 flex-col">
-        <div>
-          {" "}
-          <img className="h-5" src={isVeg ? VEG_SYMBOL : NON_VEG_SYMBOL} />{" "}
+      {isCartCard ? (
+        <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg self-center sm:self-auto">
+          <img
+            className="h-full w-full object-cover"
+            src={new URL(CDN_URL + imageId, import.meta.url).href}
+          />
         </div>
-        <div className="font-bold text-lg">{name}</div>
-        <div>₹ {defaultPrice ? defaultPrice / 100 : price / 100}</div>
-        <div className="flex relative">
+      ) : null}
+
+      <div className={`min-w-0 flex flex-1 flex-col ${isMenuCard ? "gap-2" : "gap-1"}`}>
+        <div>
+          <img className="h-5" src={isVeg ? VEG_SYMBOL : NON_VEG_SYMBOL} />
+        </div>
+        <div className="text-lg font-semibold text-gray-900 dark:text-white sm:text-xl">{name}</div>
+        {isCartCard ? (
+          <div className="line-clamp-1 text-sm text-gray-500 dark:text-gray-400">
+            {description ? description : "Freshly prepared item"}
+          </div>
+        ) : null}
+        <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
           {rating ? (
-            <>
-              <span className="absolute top-1">{STAR_SVG}</span>
-              <span className="px-4">
+            <div className="flex items-center gap-1">
+              <span>{STAR_SVG}</span>
+              <span>
                 {rating} ({ratingCountV2})
               </span>
-            </>
+            </div>
           ) : (
             <></>
           )}
+          <div className="font-semibold text-gray-900 dark:text-white">
+            Rs. {defaultPrice ? defaultPrice / 100 : price / 100}
+          </div>
         </div>
-        <div>
-          <p className={more ? "" : "line-clamp-2"}>{description}</p>
-          <span
-            className="cursor-pointer font-medium"
-            onClick={() => {
-              handleMore();
-            }}
-          >
-            {more ? "less" : "...more"}
-          </span>
-        </div>
+        {isMenuCard ? (
+          <div className="min-w-0">
+            <p className={`text-sm text-gray-500 dark:text-gray-400 ${more ? "" : "line-clamp-2"}`}>
+              {description}
+            </p>
+            <span
+              className="cursor-pointer text-sm font-medium text-[#EF4F5F]"
+              onClick={() => {
+                handleMore();
+              }}
+            >
+              {more ? "less" : "...more"}
+            </span>
+          </div>
+        ) : null}
       </div>
-      <div className="relative">
-        <img
-          className="h-30 pl-10  "
-          src={new URL(CDN_URL + imageId, import.meta.url).href}
-        />
-        {addBtn ? (
+
+      {isMenuCard ? (
+        <div className="w-full flex-shrink-0 lg:w-32">
+          <div className="h-40 w-full overflow-hidden rounded-lg lg:h-32 lg:w-32">
+            <img
+              className="h-full w-full object-cover"
+              src={new URL(CDN_URL + imageId, import.meta.url).href}
+            />
+          </div>
           <span
-            className="absolute bottom-3 rounded-lg border-2 border-green-300 p-2 font-medium text-lg left-20 bg-gray-50 cursor-pointer hover:bg-black hover:text-white"
+            className="mt-2 flex h-10 w-full cursor-pointer items-center justify-center rounded-lg bg-[#EF4F5F] px-4 py-2 text-center text-sm font-semibold text-white"
             onClick={() => {
               addItemDispatch();
             }}
           >
-            Add +
+            Add
           </span>
-        ) : (
-          <></>
-        )}
+        </div>
+      ) : null}
 
-        {removeBtn ? (
-          <div className="flex">
-            <div
-              className="absolute bottom-3 rounded-lg border-2 border-black font-bold p-2 left-14  h-11  hover:text-white cursor-pointer hover:bg-red-500"
-              onClick={() => {
-                removeItemQuantityDispatch();
-              }}
-            >
-              -
-            </div>
-            <span
-              className="flex justify-between absolute bottom-3 rounded-lg border-2 border-red-500 p-2 font-medium text-lg left-20 bg-gray-50 cursor-pointer hover:bg-black hover:text-white hover:border-black hover:font-bold"
-              onClick={() => {
-                removeItemDispatch();
-              }}
-            >
-              Remove
-            </span>
-            <div
-              className="absolute bottom-3 rounded-lg border-2 border-black p-2 -right-8.75  h-11  hover:bg-green-400 hover:text-white cursor-pointer font-bold"
-              onClick={() => {
-                addItemDispatch();
-              }}
-            >
-              +
-            </div>
-            <div className="absolute border-2 border-black px-2 -bottom-2 left-27 py-0 rounded-lg text-sm font-bold">
-              {quantity}
-            </div>
+      {isCartCard ? (
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-end">
+          <div
+            className="flex h-10 min-w-10 cursor-pointer items-center justify-center rounded border border-[#E8E8E8] px-3 py-2 text-sm font-semibold text-[#1C1C1C] dark:border-[#3A3A3A] dark:text-white"
+            onClick={() => {
+              removeItemQuantityDispatch();
+            }}
+          >
+            -
           </div>
-        ) : (
-          <></>
-        )}
-      </div>
+          <div className="min-w-8 text-center text-sm font-semibold text-gray-900 dark:text-white">
+            {quantity}
+          </div>
+          <div
+            className="flex h-10 min-w-10 cursor-pointer items-center justify-center rounded border border-[#E8E8E8] px-3 py-2 text-sm font-semibold text-[#1C1C1C] dark:border-[#3A3A3A] dark:text-white"
+            onClick={() => {
+              addItemDispatch();
+            }}
+          >
+            +
+          </div>
+          <span
+            className="cursor-pointer text-sm font-medium text-red-500"
+            onClick={() => {
+              removeItemDispatch();
+            }}
+          >
+            Remove
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 };
