@@ -28,11 +28,15 @@ const ResCard = (props) => {
           ></img>
         </div>
       </div>
-      <div className="flex flex-grow flex-col gap-2 p-4">
+      <div className="flex flex-grow flex-col gap-2 p-4 ">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{mealName}</h3>
-            <h4 className="mt-1 text-sm text-gray-500 dark:text-gray-400">By {restroName}</h4>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              {mealName}
+            </h3>
+            <h4 className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              By {restroName}
+            </h4>
           </div>
           <div className="shrink-0 text-[#EF4F5F]">{CHECK_OUT_SVG}</div>
         </div>
@@ -41,7 +45,9 @@ const ResCard = (props) => {
             <span>{STAR_SVG}</span>
             <h4>{avgRating}</h4>
           </div>
-          <h4>{minDeliveryTime} - {maxDeliveryTime} mins</h4>
+          <h4>
+            {minDeliveryTime} - {maxDeliveryTime} mins
+          </h4>
         </div>
         <div className="h-px w-full bg-[#E8E8E8] dark:bg-[#3A3A3A]"></div>
         <div className="flex flex-col gap-2">
@@ -50,9 +56,13 @@ const ResCard = (props) => {
             className="decoration-0 cursor-pointer"
             to={"restraunts/" + restrauntId}
           >
-            <h4 className="text-sm text-gray-500 dark:text-gray-400">Explore menu details</h4>
+            <h4 className="text-sm text-gray-500 dark:text-gray-400">
+              Explore menu details
+            </h4>
           </Link>
-          <h4 className="font-semibold text-gray-900 dark:text-white">Rs. {mealPrice / 100}</h4>
+          <h4 className="font-semibold text-gray-900 dark:text-white">
+            Rs. {mealPrice / 100}
+          </h4>
         </div>
         <div className="mt-auto flex items-center justify-between gap-3 pt-2">
           <h4 className="inline-flex w-fit rounded-full border border-[#E8E8E8] bg-[#F8F8F8] px-4 py-2 text-sm text-gray-500 dark:border-[#3A3A3A] dark:bg-[#1C1C1C] dark:text-gray-400">
